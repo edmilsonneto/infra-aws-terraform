@@ -5,15 +5,13 @@ resource "aws_instance" "server-01" {
   tags = {
     Name = "server-01"
   }
-  vpc_security_group_ids = ["${aws_security_group.http.id}", "${aws_security_group.ssh.id}"]
+  vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
   user_data = <<-EOF
               #!/bin/bash
-              sudo yum update -y
-              sudo yum install -y httpd
-              cd /var/www
-              sudo mkdirhtml
-              sudo chmod +777 html
-              sudo echo "Hello, server-01!" > index.html
+              sudo su
+              yum update -y
+              yum install -y httpd
+              sudo echo "Hello, server-01" > /var/www/html/index.html
               sudo service httpd start
               sudo chkconfig httpd on
               EOF
@@ -26,15 +24,14 @@ resource "aws_instance" "server-02" {
   tags = {
     Name = "server-02"
   }
-  vpc_security_group_ids = ["${aws_security_group.http.id}", "${aws_security_group.ssh.id}"]
+
+  vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
   user_data = <<-EOF
               #!/bin/bash
-              sudo yum update -y
-              sudo yum install -y httpd
-              cd /var/www
-              sudo mkdirhtml
-              sudo chmod +777 html
-              sudo echo "Hello, server-02!" > index.html
+              sudo su
+              yum update -y
+              yum install -y httpd
+              sudo echo "Hello, server-02" > /var/www/html/index.html
               sudo service httpd start
               sudo chkconfig httpd on
               EOF
