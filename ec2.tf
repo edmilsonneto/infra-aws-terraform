@@ -5,7 +5,7 @@ resource "aws_instance" "server-01" {
   tags = {
     Name = "server-01"
   }
-  vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
+  # vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
   user_data = <<-EOF
               #!/bin/bash
               sudo su
@@ -25,7 +25,7 @@ resource "aws_instance" "server-02" {
     Name = "server-02"
   }
 
-  vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
+  # vpc_security_group_ids = ["${aws_security_group.sg-ssh.id}", "${aws_security_group.sg-internet.id}"]
   user_data = <<-EOF
               #!/bin/bash
               sudo su
